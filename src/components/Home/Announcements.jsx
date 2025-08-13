@@ -24,17 +24,25 @@ const Announcements = () => {
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
+      {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900">
           Recent Announcements
         </h3>
         <Bell className="h-5 w-5 text-gray-400" />
       </div>
+
+      {/* Announcements list */}
       <div className="space-y-4">
         {announcements.map((announcement) => (
-          <AnnouncementCard key={announcement.id} announcement={announcement} />
+          <AnnouncementCard
+            key={announcement.id}
+            announcement={announcement}
+          />
         ))}
       </div>
+
+      {/* View all button */}
       <button className="w-full mt-4 text-center text-blue-600 hover:text-blue-700 text-sm font-medium">
         View All Announcements
       </button>
