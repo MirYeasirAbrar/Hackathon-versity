@@ -4,6 +4,7 @@ import RegisterImg from "../../../public/assets/smegx.jpg";
 import Context from "../../Context/Context";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const academicYears = [
   "1st Year",
@@ -33,6 +34,7 @@ const Register = () => {
 
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+  const navigate = useNavigate();
 
   const password = watch("password", "");
   const confirmPassword = watch("confirmPassword", "");
@@ -46,6 +48,7 @@ const Register = () => {
       email: data.email,
       academicYear: data.academicYear,
       department: data.department,
+      role: "user",
     };
     axios
       .post("http://localhost:7254/users", newUser)
@@ -57,9 +60,12 @@ const Register = () => {
             title: "Your account has been created successfully",
             showConfirmButton: false,
             timer: 1500,
+          }).then(() => {
+            navigate("/");
           });
         }
       })
+
       .catch((err) => {
         console.error(err);
         Swal.fire({

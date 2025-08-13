@@ -10,12 +10,13 @@ import {
 import LoginImg from "../../../public/assets/smegx.jpg";
 import Context from "../../Context/Context";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const { logInUser, setUser } = useContext(Context);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -26,15 +27,20 @@ const Login = () => {
     setLoading(true);
     try {
       const res = await logInUser(data.email, data.password);
-      setUser(res.user);
-      if (res.status === 200) {
+
+      if (res?.user) {
+        setUser(res.user);
         Swal.fire({
           position: "top-end",
           icon: "success",
           title: "You have logged in successfully",
           showConfirmButton: false,
           timer: 1500,
+        }).then(() => {
+          navigate("/");
         });
+      } else {
+        throw new Error("Invalid credentials");
       }
     } catch (error) {
       Swal.fire({

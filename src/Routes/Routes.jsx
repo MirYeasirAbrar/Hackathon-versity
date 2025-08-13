@@ -5,6 +5,7 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import Contact from "../components/Contact/Contact";
 import Announcement from "../components/Announcement/Announcement";
+import DashboardLayout from "../Layouts/DashboardLayout";
 
 const routers = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const routers = createBrowserRouter([
       {
         path: "/announcement",
         element: <Announcement />,
+      },
+      {
+        path: "/dashboard/:role",
+        element: <DashboardLayout />,
       },
     ],
   },

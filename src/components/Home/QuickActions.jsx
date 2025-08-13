@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const QuickActions = () => {
   return (
@@ -6,9 +7,9 @@ const QuickActions = () => {
       <h3 className="text-lg font-semibold text-gray-900 mb-4">
         Quick Actions
       </h3>
-      <div className="space-y-3">
+      <div className="space-y-3 flex items-center justify-between w-4xl mx-auto space-x-3">
         <button className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">
-          Become a Member
+          <Link to={'/register'}>Become a Member</Link>
         </button>
         <button className="w-full border border-blue-600 text-blue-600 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors">
           View Profile
