@@ -1,22 +1,20 @@
 import React from "react";
 
-const AnnouncementItem = ({ announcement }) => {
+const AnnouncementItem = ({ title, content, priority, date }) => {
   return (
-    <div className="card bg-base-200 shadow-lg p-4 flex justify-between items-center">
-      <div className="flex-1">
-        <h2 className="card-title">{announcement.title}</h2>
-        <p className="mt-2">{announcement.content}</p>
-        <div className="mt-2 text-sm opacity-70">{announcement.date}</div>
+    <div className="border p-4 rounded flex justify-between items-center">
+      <div>
+        <h3 className="font-bold">{title}</h3>
+        <p className="text-sm text-gray-600">{content}</p>
+        <p className="text-xs text-gray-500 mt-1">{date}</p>
       </div>
-      <div className="flex-shrink-0 flex items-center">
-        <span
-          className={`badge ${
-            announcement.priority === "Urgent" ? "badge-error" : "badge-success"
-          }`}
-        >
-          {announcement.priority}
-        </span>
-      </div>
+      <span
+        className={`px-2 py-1 rounded text-white text-xs ${
+          priority === "Urgent" ? "bg-red-500" : "bg-blue-500"
+        }`}
+      >
+        {priority}
+      </span>
     </div>
   );
 };

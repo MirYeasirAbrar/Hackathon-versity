@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import SearchFilter from "../components/filters/SearchFilter";
-import CategoryFilter from "../components/filters/CategoryFilter";
-import SubscribeToggle from "../components/filters/SubscribeToggle";
-import AnnouncementList from "../components/announcements/AnnouncementList";
-import ArchiveList from "../components/archive/ArchiveList";
+import SearchFilter from "../components/Filters/SearchFilter";
+import CategoryFilter from "../components/Filters/CategoryFilter";
+import SubscribeToggle from "../components/Filters/SubscribeToggle";
+import AnnouncementList from "../components/Announcements/AnnouncementList";
+import ArchiveList from "../components/Archive/ArchiveList";
 
 const AnnouncementPage = () => {
   const [search, setSearch] = useState("");
