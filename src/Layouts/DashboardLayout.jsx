@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Context from "../Context/Context";
 import UserDashboard from "../components/Dashboard/UserDashboard";
 import AdminDashboard from "../components/Dashboard/AdminDashboard";
-import MemberDashboard from "../components/Dashboard/MemberDashboard";
 
 const DashboardLayout = () => {
   const { currUser } = useContext(Context);
@@ -12,15 +11,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <>
-      {currUser.role === "user" ? (
-        <UserDashboard />
-      ) : currUser.role === "admin" ? (
-        <AdminDashboard />
-      ) : (
-        <MemberDashboard />
-      )}
-    </>
+    <>{currUser.role === "admin" ? <AdminDashboard /> : <UserDashboard />}</>
   );
 };
 
