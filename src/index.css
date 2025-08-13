@@ -1,2 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+/* Small helper class for consistent glass panels */
+.glass {
+  /* translucent white with more contrast */
+  @apply bg-white/6 backdrop-blur-md border border-white/10 shadow-lg rounded-lg;
+}
+
+/* Optional dark glass */
+.glass-dark {
+  @apply bg-black/30 backdrop-blur-md border border-white/10 shadow-lg rounded-lg;
+}
