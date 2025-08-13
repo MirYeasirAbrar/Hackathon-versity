@@ -1,121 +1,71 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, User, Settings, LogOut, Home, FileText, Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import React from "react";
 
 const UserDashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const stats = [
-    { label: "Total Events Joined", value: 8 },
-    { label: "Certificates Earned", value: 5 },
-    { label: "Pending Invitations", value: 2 },
+    { label: "Total Projects", value: 8 },
+    { label: "Active Tasks", value: 14 },
+    { label: "Completed Tasks", value: 22 },
   ];
 
-  const activities = [
-    { id: 1, action: "Joined 'React Workshop'", date: "Aug 10, 2025", status: "Completed" },
-    { id: 2, action: "Registered for 'Hackathon 2025'", date: "Aug 12, 2025", status: "Ongoing" },
-    { id: 3, action: "Profile updated", date: "Aug 13, 2025", status: "Completed" },
-  ];
-
-  const navLinks = [
-    { name: "Dashboard", icon: <Home className="h-4 w-4" />, path: "/dashboard" },
-    { name: "My Events", icon: <FileText className="h-4 w-4" />, path: "/events" },
-    { name: "Notifications", icon: <Bell className="h-4 w-4" />, path: "/notifications" },
-    { name: "Settings", icon: <Settings className="h-4 w-4" />, path: "/settings" },
+  const recentActivities = [
+    { id: 1, title: "UI Design Updated", date: "2025-08-10", status: "Completed" },
+    { id: 2, title: "API Integration", date: "2025-08-11", status: "In Progress" },
+    { id: 3, title: "Bug Fixing", date: "2025-08-12", status: "Pending" },
   ];
 
   return (
-    <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <aside className={`fixed md:static top-0 left-0 z-40 w-64 bg-background border-r h-full transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0 transition-transform duration-200`}>
-        <div className="flex items-center justify-between px-4 h-16 border-b">
-          <h1 className="text-lg font-bold">User Dashboard</h1>
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsSidebarOpen(false)}>
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-        <nav className="p-4 space-y-2">
-          {navLinks.map((link) => (
-            <Link key={link.name} to={link.path} className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium hover:bg-accent transition">
-              {link.icon}
-              {link.name}
-            </Link>
-          ))}
-        </nav>
-      </aside>
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900 flex flex-col items-center py-10 px-4">
+      {/* Dashboard Title */}
+      <h1 className="text-4xl font-bold text-white mb-10 drop-shadow-lg">
+        User Dashboard
+      </h1>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Top Navbar */}
-        <header className="flex items-center justify-between h-16 border-b px-4 bg-background">
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsSidebarOpen(true)}>
-              <Menu className="h-5 w-5" />
-            </Button>
-            <h2 className="text-lg font-semibold">Welcome Back!</h2>
+      {/* Stats Section */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
+        {stats.map((stat, index) => (
+          <div
+            key={index}
+            className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl p-6 text-center shadow-lg hover:scale-105 transition-transform"
+          >
+            <p className="text-gray-300">{stat.label}</p>
+            <h2 className="text-3xl font-bold text-white">{stat.value}</h2>
           </div>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              <User className="h-5 w-5 mr-1" />
-              Profile
-            </Button>
-            <Button variant="outline" size="sm">
-              <LogOut className="h-5 w-5 mr-1" />
-              Logout
-            </Button>
-          </div>
-        </header>
+        ))}
+      </div>
 
-        {/* Dashboard Body */}
-        <main className="p-4 overflow-auto">
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            {stats.map((stat, index) => (
-              <Card key={index} className="hover:shadow-lg transition">
-                <CardHeader>
-                  <CardTitle>{stat.label}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-3xl font-bold">{stat.value}</p>
-                </CardContent>
-              </Card>
+      {/* Recent Activities */}
+      <div className="mt-12 w-full max-w-5xl backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl shadow-lg p-6">
+        <h2 className="text-2xl font-semibold text-white mb-6">Recent Activities</h2>
+        <table className="w-full text-left">
+          <thead>
+            <tr className="text-gray-300 border-b border-white/20">
+              <th className="pb-2">Title</th>
+              <th className="pb-2">Date</th>
+              <th className="pb-2">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recentActivities.map((activity) => (
+              <tr key={activity.id} className="border-b border-white/10 hover:bg-white/5">
+                <td className="py-3 text-white">{activity.title}</td>
+                <td className="py-3 text-gray-300">{activity.date}</td>
+                <td className="py-3">
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      activity.status === "Completed"
+                        ? "bg-green-500/30 text-green-200"
+                        : activity.status === "In Progress"
+                        ? "bg-yellow-500/30 text-yellow-200"
+                        : "bg-red-500/30 text-red-200"
+                    }`}
+                  >
+                    {activity.status}
+                  </span>
+                </td>
+              </tr>
             ))}
-          </div>
-
-          {/* Recent Activity */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="text-left border-b">
-                    <th className="pb-2">Action</th>
-                    <th className="pb-2">Date</th>
-                    <th className="pb-2">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {activities.map((activity) => (
-                    <tr key={activity.id} className="border-b">
-                      <td className="py-2">{activity.action}</td>
-                      <td>{activity.date}</td>
-                      <td>
-                        <Badge variant={activity.status === "Completed" ? "success" : "warning"}>
-                          {activity.status}
-                        </Badge>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
-        </main>
+          </tbody>
+        </table>
       </div>
     </div>
   );
