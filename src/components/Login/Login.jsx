@@ -13,7 +13,8 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-  const { logInUser, setUser } = useContext(Context);
+  const { logInUser, setUser, logInWithGoogle, logInWithGithub } =
+    useContext(Context);
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -52,7 +53,19 @@ const Login = () => {
       setLoading(false);
     }
   };
+  const handleGoogleLogin = () => {
+    logInWithGoogle().then((res) => {
+      setUser(res.user);
+      navigate("/");
+    });
+  };
 
+  const handleGithubLogin = () => {
+    logInWithGithub().then((res) => {
+      setUser(res.user);
+      navigate("/");
+    });
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 p-4">
       <h1 className="text-3xl font-bold mb-6">Login to continue!</h1>
@@ -140,10 +153,16 @@ const Login = () => {
             <button className="btn btn-circle bg-blue-600 hover:bg-blue-700 text-white">
               <FaFacebookF size={18} />
             </button>
-            <button className="btn btn-circle bg-gray-800 hover:bg-gray-900 text-white">
+            <button
+              onClick={handleGithubLogin}
+              className="btn btn-circle bg-gray-800 hover:bg-gray-900 text-white"
+            >
               <FaGithub size={18} />
             </button>
-            <button className="btn btn-circle bg-red-600 hover:bg-red-700 text-white">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn btn-circle bg-red-600 hover:bg-red-700 text-white"
+            >
               <FaGoogle size={18} />
             </button>
           </div>
