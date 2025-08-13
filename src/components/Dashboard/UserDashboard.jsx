@@ -1,9 +1,6 @@
 import React from "react";
 
 const UserDashboard = () => {
-<<<<<<< HEAD
-  return <div>UserDashboard</div>;
-=======
   const stats = [
     { label: "Total Projects", value: 8 },
     { label: "Active Tasks", value: 14 },
@@ -72,7 +69,6 @@ const UserDashboard = () => {
       </div>
     </div>
   );
->>>>>>> 7d57d1526091ef1771c77cbb68d0fa399916c918
 };
 
-export default UserDashboard;
+export default UserDashboard;

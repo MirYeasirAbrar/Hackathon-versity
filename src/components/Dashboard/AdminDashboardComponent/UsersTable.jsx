@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Plus, Edit, Trash2 } from "lucide-react";
-import UserForm from "@/components/UserForm";
+import UserForm from "./UserForm";
 
 /**
  * UsersTable - simple management table with a create/edit dialog (mock)
