@@ -5,7 +5,7 @@ import EventCard from "./EventCard";
 const UpcomingEvents = () => {
   const upcomingEvents = [
     {
-      id: 1,
+      _id: 1,
       title: "Programming Contest 2025",
       date: "March 15, 2025",
       time: "10:00 AM",
@@ -14,7 +14,7 @@ const UpcomingEvents = () => {
       maxParticipants: 100,
     },
     {
-      id: 2,
+      _id: 2,
       title: "Web Development Workshop",
       date: "March 20, 2025",
       time: "2:00 PM",
@@ -23,7 +23,7 @@ const UpcomingEvents = () => {
       maxParticipants: 40,
     },
     {
-      id: 3,
+      _id: 3,
       title: "Algorithm Study Session",
       date: "March 25, 2025",
       time: "4:00 PM",

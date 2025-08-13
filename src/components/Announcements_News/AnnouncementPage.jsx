@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
-=======
-import SearchFilter from "../components/Filters/SearchFilter";
-import CategoryFilter from "../components/Filters/CategoryFilter";
-import SubscribeToggle from "../components/Filters/SubscribeToggle";
-import AnnouncementList from "../components/Announcements/AnnouncementList";
-import ArchiveList from "../components/Archive/ArchiveList";
->>>>>>> 31bf15ebd8e44542c23ead37946e7e4763a0ece6
+import SearchFilter from "../Announcements_News/Filters/SearchFilter";
+import CategoryFilter from "../Announcements_News/Filters/CategoryFilter";
+import SubscribeToggle from "../Announcements_News/Filters/SubscribeToggle";
+import AnnouncementList from "../Announcements_News/Announcements/AnnouncementList";
+import ArchiveList from "../Announcements_News/Archive/ArchiveList";
 
 const AnnouncementPage = () => {
   const [search, setSearch] = useState("");

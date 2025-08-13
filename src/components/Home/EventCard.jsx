@@ -1,5 +1,6 @@
 import React from "react";
 import { Calendar, Clock, MapPin } from "lucide-react";
+import { Link } from "react-router";
 
 const EventCard = ({ event }) => {
   return (
@@ -28,7 +29,9 @@ const EventCard = ({ event }) => {
               {event.participants}/{event.maxParticipants} registered
             </span>
             <button className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
-              Register
+              <Link state={{ event }} to={`/eventRegistration/${event._id}`}>
+                Register
+              </Link>
             </button>
           </div>
         </div>

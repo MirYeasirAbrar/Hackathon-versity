@@ -6,6 +6,7 @@ import Register from "../components/Register/Register";
 import Contact from "../components/Contact/Contact";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import AnnouncementPage from "../components/Announcements_News/AnnouncementPage";
+import EventRegistration from "../Registration_Form/EventRegistration";
 
 const routers = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const routers = createBrowserRouter([
         path: "/dashboard/:role",
         element: <DashboardLayout />,
       },
+      {
+        path: "/eventRegistration/:eventId",
+        element: <EventRegistration />,
+      }
     ],
   },
 ]);
