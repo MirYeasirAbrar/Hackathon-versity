@@ -10,18 +10,6 @@ const Topbar = () => {
         </button>
         <h3 className="text-lg font-semibold">Welcome, Admin</h3>
       </div>
-
-      <div className="flex items-center gap-3">
-        <button className="flex items-center gap-2 px-3 py-1 rounded-md hover:bg-white/6">
-          <User className="h-4 w-4" />
-          <span className="hidden sm:inline">Profile</span>
-        </button>
-
-        <button className="flex items-center gap-2 px-3 py-1 rounded-md hover:bg-white/6">
-          <LogOut className="h-4 w-4" />
-          <span className="hidden sm:inline">Logout</span>
-        </button>
-      </div>
     </header>
   );
 };
