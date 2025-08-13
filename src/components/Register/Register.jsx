@@ -1,224 +1,295 @@
-import React, { useState, useRef } from "react";
-import {
-  FaEye,
-  FaEyeSlash,
-  FaFacebookF,
-  FaGithub,
-  FaGoogle,
-} from "react-icons/fa";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
+import React, { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
 import RegisterImg from "../../../public/assets/smegx.jpg";
+import Context from "../../Context/Context";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+const academicYears = [
+  "1st Year",
+  "2nd Year",
+  "3rd Year",
+  "4th Year",
+  "Graduate",
+];
+
+const departments = [
+  "Computer Science",
+  "Electrical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Business Administration",
+];
 
 const Register = () => {
-  const [captchaValue, setCaptchaValue] = useState(null);
+  const { setUser, createUser } = useContext(Context);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isValid },
+    reset,
+  } = useForm({ mode: "onChange" });
+
   const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
 
-  // Controlled select states:
-  const [department, setDepartment] = useState("");
-  const [year, setYear] = useState("");
+  const password = watch("password", "");
+  const confirmPassword = watch("confirmPassword", "");
 
-  const togglePass = () => {
-    setShowPass(!showPass);
-  };
+  const passwordsMatch = password === confirmPassword && password.length > 0;
 
-  const captchaRef = useRef();
+  const onSubmit = (data) => {
+    createUser(data.email, data.password);
+    const newUser = {
+      name: data.name,
+      email: data.email,
+      academicYear: data.academicYear,
+      department: data.department,
+    };
+    axios
+      .post("http://localhost:7254/users", newUser)
+      .then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your account has been created successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      });
 
-  const handleCaptchaVerify = (token) => {
-    setCaptchaValue(token);
-    console.log("hCaptcha token:", token);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!captchaValue) {
-      alert("Please verify the captcha!");
-      return;
-    }
-    // Proceed with form submission
-    console.log("Form submitted with hCaptcha token:", captchaValue);
+    setUser(newUser);
+    reset();
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 p-4">
-      <h1 className="text-3xl font-bold mb-6">Create Your Account</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 p-6">
+      <h1 className="text-3xl font-bold mb-8">Create Your Account</h1>
 
-      <div className="flex flex-col md:flex-row max-w-5xl w-full bg-base-100 shadow-xl rounded-xl overflow-hidden">
-        {/* Image Section */}
+      <div className="flex flex-col md:flex-row bg-base-100 rounded-xl shadow-xl overflow-hidden max-w-5xl w-full">
+        {/* Left Image */}
         <div
-          className="w-full md:w-1/2 bg-cover bg-center"
-          style={{ backgroundImage: `url(${RegisterImg})`, minHeight: "300px" }}
-        ></div>
+          className="hidden md:block md:w-1/2 bg-cover bg-center"
+          style={{ backgroundImage: `url(${RegisterImg})`, minHeight: "450px" }}
+        />
 
-        {/* Form Section */}
-        <form onSubmit={handleSubmit} className="w-full md:w-1/2 p-6 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Full Name */}
-            <div className="form-control">
-              <label className="label font-semibold">
-                <span className="label-text">Full Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="John Doe"
-                className="input input-bordered input-primary w-full"
-                required
-              />
-            </div>
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full md:w-1/2 p-8 grid grid-cols-1 md:grid-cols-2 gap-6"
+          noValidate
+        >
+          {/* Full width title */}
+          <h2 className="md:col-span-2 text-2xl font-semibold mb-4 text-center">
+            Register
+          </h2>
 
-            {/* Email */}
-            <div className="form-control">
-              <label className="label font-semibold">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="you@example.com"
-                className="input input-bordered input-primary w-full"
-                required
-              />
-            </div>
-
-            {/* Phone Number */}
-            <div className="form-control">
-              <label className="label font-semibold">
-                <span className="label-text">Phone Number</span>
-              </label>
-              <input
-                type="tel"
-                placeholder="+880 1XXX-XXXXXX"
-                className="input input-bordered input-primary w-full"
-                required
-              />
-            </div>
-
-            {/* Department */}
-            <div className="form-control">
-              <label className="label font-semibold">
-                <span className="label-text">Department</span>
-              </label>
-              <select
-                className="select select-bordered select-primary w-full"
-                required
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-              >
-                <option value="" disabled>
-                  Select department
-                </option>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="BBA">BBA</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            {/* Academic Year */}
-            <div className="form-control">
-              <label className="label font-semibold">
-                <span className="label-text">Academic Year</span>
-              </label>
-              <select
-                className="select select-bordered select-primary w-full"
-                required
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-              >
-                <option value="" disabled>
-                  Select year
-                </option>
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-              </select>
-            </div>
-
-            {/* Password */}
-            <div className="form-control">
-              <label className="label font-semibold">
-                <span className="label-text">Password</span>
-              </label>
-              <div className="relative w-full">
-                <input
-                  type={showPass ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="input input-bordered input-primary w-full"
-                  required
-                />
-                <span
-                  onClick={togglePass}
-                  className="absolute text-gray-400 top-1/2 right-3 transform -translate-y-1/2 cursor-pointer select-none"
-                >
-                  {showPass ? <FaEyeSlash /> : <FaEye />}
-                </span>
-              </div>
-            </div>
-
-            {/* Confirm Password */}
-            <div className="form-control md:col-span-2">
-              <label className="label font-semibold">
-                <span className="label-text">Confirm Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="Re-enter your password"
-                className="input input-bordered input-primary w-full"
-                required
-              />
-            </div>
-          </div>
-
-          {/* hCaptcha */}
-          <div className="flex justify-center">
-            <HCaptcha
-              sitekey="ES_0201d510206b4e599edf1de3debd6633"
-              onVerify={handleCaptchaVerify}
-              ref={captchaRef}
+          {/* Username */}
+          <div className="form-control">
+            <label className="label font-semibold" htmlFor="username">
+              Username
+            </label>
+            <input
+              id="username"
+              type="text"
+              placeholder="Your username"
+              className={`input input-bordered w-full ${
+                errors.username ? "input-error" : ""
+              }`}
+              {...register("username", {
+                required: "Username is required",
+                minLength: { value: 3, message: "At least 3 characters" },
+              })}
             />
+            {errors.username && (
+              <p className="text-error text-sm mt-1">
+                {errors.username.message}
+              </p>
+            )}
           </div>
 
-          {/* Register Button */}
+          {/* Email */}
+          <div className="form-control">
+            <label className="label font-semibold" htmlFor="email">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              className={`input input-bordered w-full ${
+                errors.email ? "input-error" : ""
+              }`}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email address",
+                },
+              })}
+            />
+            {errors.email && (
+              <p className="text-error text-sm mt-1">{errors.email.message}</p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="form-control">
+            <label className="label font-semibold" htmlFor="password">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                id="password"
+                type={showPass ? "text" : "password"}
+                placeholder="••••••••"
+                className={`input input-bordered w-full ${
+                  errors.password ? "input-error" : ""
+                }`}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: { value: 6, message: "Minimum 6 characters" },
+                })}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPass((v) => !v)}
+                className="absolute text-xs top-1/2 right-3 -translate-y-1/2 text-gray-500 select-none"
+                tabIndex={-1}
+              >
+                {showPass ? "Hide" : "Show"}
+              </button>
+            </div>
+            {errors.password && (
+              <p className="text-error text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          {/* Confirm Password */}
+          <div className="form-control">
+            <label className="label font-semibold" htmlFor="confirmPassword">
+              Confirm Password
+            </label>
+            <div className="relative">
+              <input
+                id="confirmPassword"
+                type={showConfirmPass ? "text" : "password"}
+                placeholder="Re-enter password"
+                className={`input input-bordered w-full ${
+                  errors.confirmPassword ? "input-error" : ""
+                }`}
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPass((v) => !v)}
+                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 select-none text-xs"
+                tabIndex={-1}
+              >
+                {showConfirmPass ? "Hide" : "Show"}
+              </button>
+            </div>
+            {errors.confirmPassword && (
+              <p className="text-error text-sm mt-1">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+
+          {/* Academic Year */}
+          <div className="form-control">
+            <label className="label font-semibold" htmlFor="academicYear">
+              Academic Year
+            </label>
+            <select
+              id="academicYear"
+              className={`input input-bordered w-full ${
+                errors.academicYear ? "input-error" : ""
+              }`}
+              {...register("academicYear", {
+                required: "Please select your academic year",
+              })}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select year
+              </option>
+              {academicYears.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+            {errors.academicYear && (
+              <p className="text-error text-sm mt-1">
+                {errors.academicYear.message}
+              </p>
+            )}
+          </div>
+
+          {/* Department */}
+          <div className="form-control">
+            <label className="label font-semibold" htmlFor="department">
+              Department
+            </label>
+            <select
+              id="department"
+              className={`input input-bordered w-full ${
+                errors.department ? "input-error" : ""
+              }`}
+              {...register("department", {
+                required: "Please select your department",
+              })}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select department
+              </option>
+              {departments.map((dept) => (
+                <option key={dept} value={dept}>
+                  {dept}
+                </option>
+              ))}
+            </select>
+            {errors.department && (
+              <p className="text-error text-sm mt-1">
+                {errors.department.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit button spans both columns */}
           <button
             type="submit"
-            className="btn btn-primary w-full"
-            disabled={!captchaValue}
-            title={!captchaValue ? "Complete the captcha to register" : ""}
+            disabled={!isValid || !passwordsMatch}
+            title={
+              !passwordsMatch
+                ? "Passwords do not match"
+                : !isValid
+                ? "Fill all required fields"
+                : ""
+            }
+            className="btn btn-primary w-full md:col-span-2 mt-2"
           >
             Register
           </button>
-
-          {/* Divider */}
-          <div className="divider">OR</div>
-
-          {/* Social Signup */}
-          <div className="flex justify-center gap-3">
-            <button
-              type="button"
-              className="btn btn-circle bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              <FaFacebookF size={18} />
-            </button>
-            <button
-              type="button"
-              className="btn btn-circle bg-gray-800 hover:bg-gray-900 text-white"
-            >
-              <FaGithub size={18} />
-            </button>
-            <button
-              type="button"
-              className="btn btn-circle bg-red-600 hover:bg-red-700 text-white"
-            >
-              <FaGoogle size={18} />
-            </button>
-          </div>
-
-          {/* Already have an account */}
-          <p className="text-center text-sm">
-            Already have an account?{" "}
-            <a href="/login" className="text-primary hover:underline">
-              Login here
-            </a>
-          </p>
         </form>
       </div>
     </div>
