@@ -3,8 +3,10 @@ import React from "react";
 const SubscribeToggle = ({ subscribed, setSubscribed }) => {
   return (
     <button
-      className={`btn ${subscribed ? "btn-error" : "btn-success"} w-full md:w-auto`}
       onClick={() => setSubscribed(!subscribed)}
+      className={`px-4 py-2 rounded text-white ${
+        subscribed ? "bg-red-500" : "bg-green-500"
+      }`}
     >
       {subscribed ? "Unsubscribe" : "Subscribe"}
     </button>
