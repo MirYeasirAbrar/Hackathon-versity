@@ -4,7 +4,7 @@ import HomeLayout from "../Layouts/HomeLayout";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import Contact from "../components/Contact/Contact";
-import Announcement from "../components/Announcement/Announcement";
+import AnnouncementPage from "../components/Announcements_News/AnnouncementPage";
 
 const routers = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ const routers = createBrowserRouter([
       },
       {
         path: "/announcement",
-        element: <Announcement />,
+        element: <AnnouncementPage />
       },
     ],
   },
