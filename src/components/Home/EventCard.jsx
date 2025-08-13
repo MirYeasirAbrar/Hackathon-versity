@@ -1,12 +1,14 @@
-import React from 'react';
-import { Calendar, Clock, MapPin } from 'lucide-react';
+import React from "react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 
 const EventCard = ({ event }) => {
   return (
     <div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <h3 className="font-semibold text-lg text-gray-900 mb-2">{event.title}</h3>
+          <h3 className="font-semibold text-lg text-gray-900 mb-2">
+            {event.title}
+          </h3>
           <div className="flex items-center text-gray-600 text-sm space-x-4 mb-3">
             <div className="flex items-center">
               <Calendar className="h-4 w-4 mr-1" />

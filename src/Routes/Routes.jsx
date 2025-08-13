@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
 import HomeLayout from "../Layouts/HomeLayout";
-import Login from "../components/Login'/Login";
+import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import Contact from "../components/Contact/Contact";
 import Announcement from "../components/Announcement/Announcement";
@@ -25,12 +25,12 @@ const routers = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: <Contact/>
+        element: <Contact />,
       },
       {
         path: "/announcement",
-        element: <Announcement/>
-      }
+        element: <Announcement />,
+      },
     ],
   },
 ]);

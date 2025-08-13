@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const QuickActions = () => {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        Quick Actions
+      </h3>
       <div className="space-y-3">
         <button className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">
           Become a Member
