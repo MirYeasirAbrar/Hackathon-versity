@@ -67,15 +67,6 @@ const Announcement = () => {
         </select>
       </div>
 
-      {/* Subscribe / Unsubscribe Button */}
-      <div className="flex justify-end">
-        <button
-          onClick={() => setSubscribed(!subscribed)}
-          className={`btn ${subscribed ? "btn-error" : "btn-success"}`}
-        >
-          {subscribed ? "Unsubscribe" : "Subscribe"} to Notifications
-        </button>
-      </div>
 
       {/* Announcements List */}
       <div className="space-y-4">
