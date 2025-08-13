@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import SearchFilter from "../components/filters/SearchFilter";
-import CategoryFilter from "../components/filters/CategoryFilter";
-import SubscribeToggle from "../components/filters/SubscribeToggle";
-import AnnouncementList from "../components/announcements/AnnouncementList";
-import ArchiveList from "../components/archive/ArchiveList";
 
 const AnnouncementPage = () => {
   const [search, setSearch] = useState("");
@@ -30,7 +25,8 @@ const AnnouncementPage = () => {
     {
       id: 3,
       title: "New Resources Available",
-      content: "Check out the new C++ learning materials in the resources section.",
+      content:
+        "Check out the new C++ learning materials in the resources section.",
       priority: "General",
       category: "Resources",
       date: "2025-08-05",
@@ -53,13 +49,18 @@ const AnnouncementPage = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
-      <h1 className="text-3xl font-bold text-center">📢 Announcements & News</h1>
+      <h1 className="text-3xl font-bold text-center">
+        📢 Announcements & News
+      </h1>
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4 justify-between">
         <SearchFilter search={search} setSearch={setSearch} />
         <CategoryFilter category={category} setCategory={setCategory} />
-        <SubscribeToggle subscribed={subscribed} setSubscribed={setSubscribed} />
+        <SubscribeToggle
+          subscribed={subscribed}
+          setSubscribed={setSubscribed}
+        />
       </div>
 
       {/* Announcements */}
@@ -68,7 +69,9 @@ const AnnouncementPage = () => {
       {/* Archive */}
       <div className="mt-10">
         <h2 className="text-xl font-bold">🗄 News Archive</h2>
-        <p className="opacity-70 text-sm">Older announcements will appear here for reference.</p>
+        <p className="opacity-70 text-sm">
+          Older announcements will appear here for reference.
+        </p>
         <ArchiveList archives={archives} />
       </div>
     </div>
