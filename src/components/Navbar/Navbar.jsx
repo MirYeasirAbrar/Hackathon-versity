@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 w-full flex items-center bg-white h-15 shadow-md">
+    <nav className="fixed z-50 top-0 left-0 w-full flex items-center bg-white h-15 shadow-md">
       <div className="px-12 w-full text-black flex items-center justify-between">
         <h1>DIU CPC</h1>
         <ul className="flex items-center justify-center space-x-4">
