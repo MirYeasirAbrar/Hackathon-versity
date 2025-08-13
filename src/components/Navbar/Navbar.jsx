@@ -10,6 +10,9 @@ const Navbar = () => {
           <li>
             <NavLink to={"/"}>Home</NavLink>
           </li>
+          <li>
+            <NavLink to={"/contact"}>Contact Us</NavLink>
+          </li>
         </ul>
         <div className="flex items-center space-x-4">
           <button className="bg-blue-400 text-white p-2 rounded-md">
