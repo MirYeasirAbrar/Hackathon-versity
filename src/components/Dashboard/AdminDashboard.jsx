@@ -90,9 +90,9 @@ const AdminDashboard = () => {
     setEvents((prev) => prev.filter((e) => e.id !== id));
 
   return (
-    <div className="flex h-screen bg-gradient-to-tr mt-16 from-slate-50 to-slate-100">
+    <div className="flex h-screen bg-gradient-to-tr from-slate-50 to-slate-100">
       <Sidebar />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 mt-20 flex flex-col">
         <Topbar />
         <main className="p-6 overflow-auto">
           {/* Stats row */}

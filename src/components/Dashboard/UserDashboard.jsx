@@ -62,7 +62,7 @@ const UserDashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex flex-col items-center py-10 px-4 md:px-8">
       {/* Dashboard Header */}
-      <header className="w-full max-w-7xl flex justify-between items-center mb-10">
+      <header className="w-full mt-13 max-w-7xl flex justify-between items-center mb-10">
         <h1 className="text-4xl font-bold text-white drop-shadow-lg">
           Dashboard <span className="text-blue-300">Overview</span>
         </h1>

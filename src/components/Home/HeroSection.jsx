@@ -7,17 +7,17 @@ const HeroSection = () => {
     {
       title: "Welcome to DIU Computer Programming Club",
       subtitle: "Empowering coders, building futures",
-      bg: "from-blue-600 via-purple-600 to-indigo-800",
+      bgClass: "from-blue-600 via-purple-600 to-indigo-800",
     },
     {
       title: "Join Our Coding Community",
       subtitle: "Learn, compete, and grow together",
-      bg: "from-emerald-500 via-teal-600 to-cyan-700",
+      bgClass: "from-emerald-500 via-teal-600 to-cyan-700",
     },
     {
       title: "Shape Your Programming Journey",
       subtitle: "Events, workshops, and endless opportunities",
-      bg: "from-rose-500 via-pink-600 to-purple-700",
+      bgClass: "from-rose-500 via-pink-600 to-purple-700",
     },
   ];
 
@@ -35,7 +35,7 @@ const HeroSection = () => {
         <div
           key={index}
           className={`absolute inset-0 bg-gradient-to-r ${
-            slide.bg
+            slide.bgClass
           } transition-opacity duration-1000 ${
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
